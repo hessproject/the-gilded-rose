@@ -50,8 +50,7 @@ class GildedRose {
                 if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                     items[i].sellIn = items[i].sellIn - 1;
                 }
-
-                //Too many nested ifs, redundant name check
+                
                 if (items[i].sellIn < 0) {
                     if (items[i].quality < 50) {
                         items[i].quality = items[i].quality + 1;
