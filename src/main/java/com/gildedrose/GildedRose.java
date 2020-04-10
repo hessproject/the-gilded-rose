@@ -36,12 +36,10 @@ class GildedRose {
 
                 //Degrading process for perishable items
                 if (!nonDegradables.contains(items[i].name)) {
-                    if (items[i].quality > 0) {
-                        if(items[i].sellIn >= 0){
-                            items[i].quality -= isConjured(items[i].name)? 1 * conjuredModifier : 1;
-                        } else {
-                            items[i].quality -= isConjured(items[i].name)? 2 * conjuredModifier : 2;
-                        }
+                    if(items[i].sellIn >= 0){
+                        items[i].quality -= isConjured(items[i].name)? 1 * conjuredModifier : 1;
+                    } else {
+                        items[i].quality -= isConjured(items[i].name)? 2 * conjuredModifier : 2;
                     }
                 } else {
 
@@ -50,13 +48,17 @@ class GildedRose {
                         items[i] = adjustConcertTickets(items[i]);
 
                     //Items that increase in quality with age eg. Aged Brie
-                    } else if (items[i].quality < 50){
+                    } else {
                         items[i].quality = items[i].quality + 1;
                     }
                 }
 
-                //Quality of items can't be negative
-                items[i].quality = items[i].quality < 0 ? 0 : items[i].quality;
+                //Quality of items can't be negative or > 50
+                if(items[i].quality > 50){
+                    items[i].quality = 50;
+                } else if (items[i].quality < 0) {
+                    items[i].quality = 0;
+                }
 
                 items[i].sellIn -= 1;
 
@@ -74,9 +76,6 @@ class GildedRose {
         } else {
             concertTicket.quality += 1;
         }
-
-        //Item quality can't be higher than 50
-        concertTicket.quality = concertTicket.quality > 50 ? 50 : concertTicket.quality;
 
         return concertTicket;
     }
