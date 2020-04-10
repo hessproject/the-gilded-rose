@@ -7,6 +7,7 @@ class GildedRose {
     Item[] items;
     ArrayList<String> nonDegradables;
     ArrayList<String> legendaryItems;
+    int conjuredModifier;
 
     public GildedRose() {
         this.items = new Item[] { //
@@ -20,6 +21,7 @@ class GildedRose {
 
         this.nonDegradables = new ArrayList<String>(List.of("Aged Brie", "Backstage passes to a TAFKAL80ETC concert"));
         this.legendaryItems = new ArrayList<String>(List.of("Sulfuras, Hand of Ragnaros"));
+        this.conjuredModifier = 2;
     }
 
     public void updateQuality(int numberOfDays) {
@@ -35,9 +37,9 @@ class GildedRose {
                 if (!nonDegradables.contains(items[i].name)) {
                     if (items[i].quality > 0) {
                         if(items[i].sellIn >= 0){
-                            items[i].quality -= 1;
+                            items[i].quality -= isConjured(items[i].name)? 1 * conjuredModifier : 1;
                         } else {
-                            items[i].quality -= 2;
+                            items[i].quality -= isConjured(items[i].name)? 2 * conjuredModifier : 2;
                         }
                     }
                 } else {
@@ -70,6 +72,10 @@ class GildedRose {
         }
 
         return concertTicket;
+    }
+
+    private boolean isConjured(String itemName){
+        return itemName.contains("Conjured");
     }
 }
 

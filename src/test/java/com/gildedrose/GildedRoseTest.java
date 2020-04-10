@@ -19,11 +19,12 @@ class GildedRoseTest {
 
         app.updateQuality(1);
 
-        assertEquals(app.items[0].quality, 19);
-        assertEquals(app.items[1].quality, 1);
-        assertEquals(app.items[2].quality, 6);
-        assertEquals(app.items[3].quality, 80);
-        assertEquals(app.items[4].quality, 21);
+        assertEquals(19, app.items[0].quality);
+        assertEquals(1, app.items[1].quality);
+        assertEquals(6, app.items[2].quality);
+        assertEquals(80, app.items[3].quality);
+        assertEquals(21, app.items[4].quality);
+        assertEquals(4, app.items[5].quality);
     }
 
 
