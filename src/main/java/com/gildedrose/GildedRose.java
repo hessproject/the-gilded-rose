@@ -25,6 +25,7 @@ class GildedRose {
     }
 
     public void updateQuality(int numberOfDays) {
+        //Let method be called multiple times, allows for easier testing
         for(int days = 0; days < numberOfDays; days++){
             for (int i = 0; i < items.length; i++) {
 
@@ -54,6 +55,9 @@ class GildedRose {
                     }
                 }
 
+                //Quality of items can't be negative
+                items[i].quality = items[i].quality < 0 ? 0 : items[i].quality;
+
                 items[i].sellIn -= 1;
 
             }
@@ -70,6 +74,9 @@ class GildedRose {
         } else {
             concertTicket.quality += 1;
         }
+
+        //Item quality can't be higher than 50
+        concertTicket.quality = concertTicket.quality > 50 ? 50 : concertTicket.quality;
 
         return concertTicket;
     }
